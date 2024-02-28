@@ -49,11 +49,11 @@ const TopQuestions = () => {
 
 const PopularTags = () => {
   const popularTags = [
-    { _id: 1, name: 'React', totalQuestions: 100 },
-    { _id: 2, name: 'Next.js', totalQuestions: 80 },
-    { _id: 3, name: 'TypeScript', totalQuestions: 70 },
-    { _id: 4, name: 'JavaScript', totalQuestions: 60 },
-    { _id: 5, name: 'Node.js', totalQuestions: 50 },
+    { _id: '1', name: 'React', totalQuestions: 100 },
+    { _id: '2', name: 'Next.js', totalQuestions: 80 },
+    { _id: '3', name: 'TypeScript', totalQuestions: 70 },
+    { _id: '4', name: 'JavaScript', totalQuestions: 60 },
+    { _id: '5', name: 'Node.js', totalQuestions: 50 },
   ];
 
   return (

@@ -3,38 +3,59 @@ import Filter from '@/components/shared/search/Filter';
 import LocalSearchbar from '@/components/shared/search/LocalSearchbar';
 import { Button } from '@/components/ui/button';
 import { HomePageFilters } from '@/constants/filters';
-// import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
-import NoResult from '@/components/home/NoResult';
+import NoResult from '@/components/shared/general/NoResult';
+import QuestionCard from '@/components/cards/QuestionCard';
 
 const questions = [
-  // {
-  //   _id: 1,
-  //   title:
-  //     'The Lightning Component c:LWC_PizzaTracker generated invalid output for field status. Error How to solve this',
-  //   tags: [
-  //     { _id: 1, name: 'next.js' },
-  //     { _id: 2, name: 'react' },
-  //   ],
-  //   author: 'John Doe',
-  //   upvotes: 10,
-  //   answers: 5,
-  //   views: 100,
-  //   createdAt: '2021-10-10T10:10:10.000Z',
-  // },
-  // {
-  //   _id: 2,
-  //   title: 'Redux Toolkit Not Updating State as Expected',
-  //   tags: [
-  //     { _id: 1, name: 'redux' },
-  //     { _id: 2, name: 'react' },
-  //   ],
-  //   author: 'John Doe',
-  //   upvotes: 20,
-  //   answers: 2,
-  //   views: 200,
-  //   createdAt: '2021-10-10T15:10:10.000Z',
-  // },
+  {
+    _id: '1',
+    title: 'How to use TypeScript with React?',
+    tags: [
+      { _id: '1', name: 'TypeScript' },
+      { _id: '2', name: 'React' },
+    ],
+    author: {
+      _id: '1',
+      name: 'John Doe',
+      avatar: '/assets/icons/avatar.svg',
+    },
+    upvotes: 10,
+    views: 100,
+    answers: [],
+    createdAt: new Date('2024-02-27T08:35:04Z'),
+  },
+  {
+    _id: '2',
+    title: 'What is the difference between interface and type in TypeScript?',
+    tags: [{ _id: '1', name: 'TypeScript' }],
+    author: {
+      _id: '2',
+      name: 'Jane Doe',
+      avatar: '/assets/icons/avatar.svg',
+    },
+    upvotes: 20,
+    views: 200,
+    answers: [],
+    createdAt: new Date('2023-02-27T08:35:04Z'),
+  },
+  {
+    _id: '3',
+    title: 'How to handle state in React?',
+    tags: [
+      { _id: '2', name: 'React' },
+      { _id: '3', name: 'State Management' },
+    ],
+    author: {
+      _id: '3',
+      name: 'Alice Smith',
+      avatar: '/assets/icons/avatar.svg',
+    },
+    upvotes: 30,
+    views: 300,
+    answers: [],
+    createdAt: new Date('2024-01-27T08:35:04Z'),
+  },
 ];
 
 export default function Home() {
@@ -66,7 +87,19 @@ export default function Home() {
 
       <div className="mt-10 flex w-full flex-col gap-6">
         {questions.length > 0 ? (
-          questions.map((question) => 'QuestionCard')
+          questions.map((question) => (
+            <QuestionCard
+              key={question._id}
+              _id={question._id}
+              title={question.title}
+              tags={question.tags}
+              author={question.author}
+              upvotes={question.upvotes}
+              answers={question.answers}
+              views={question.views}
+              createdAt={question.createdAt}
+            />
+          ))
         ) : (
           <NoResult
             title="There's no question to show"
@@ -76,18 +109,6 @@ export default function Home() {
           />
         )}
       </div>
-
-      {/* <div className="py-9">
-        <div className="rounded-[10px] bg-light-800 p-9 text-light-500 dark:bg-dark-300">
-          <h3>
-            The Lightning Component c:LWC_PizzaTracker generated invalid output
-            for field status. Error How to solve this
-          </h3>
-          <Badge className="subtle-medium background-light800_dark300 text-light400_light500 rounded-md border-none px-4 py-2 uppercase">
-            {'NEXT.JS'}
-          </Badge>
-        </div>
-      </div> */}
     </>
   );
 }
