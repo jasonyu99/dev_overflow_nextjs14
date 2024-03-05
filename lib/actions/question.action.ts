@@ -1,16 +1,37 @@
 'use server';
 
 import Question from '@/database/question.model';
-import Tag from '@/database/tag.model';
 import { connectToDatabase } from '../mongoose';
+import { CreateQuestionParams, GetQuestionsParams } from './shared.types';
+import User from '@/database/user.model';
+import Tag from '@/database/tag.model';
+import { revalidatePath } from 'next/cache';
 
-export async function createQuestion(data: any) {
+export async function getQuestions(params: GetQuestionsParams) {
+  try {
+    // connect to DB
+    connectToDatabase();
+
+    // get all questions
+    const questions = await Question.find({})
+      .populate({ path: 'tags', model: Tag })
+      .populate({ path: 'author', model: User })
+      .sort({ createdAt: -1 });
+
+    return { questions };
+  } catch (error) {
+    console.error(error);
+    throw new Error('An error occurred while fetching questions');
+  }
+}
+
+export async function createQuestion(params: CreateQuestionParams) {
   try {
     // connect to DB
     connectToDatabase();
 
     // eslint-disable-next-line
-    const { title, content, tags, author, path } = data;
+    const { title, content, tags, author, path } = params;
 
     // create a new question
     const question = await Question.create({
@@ -39,6 +60,8 @@ export async function createQuestion(data: any) {
 
     // Create an interaction record for the user's ask_question action
     // increment author's reputation by 5 for asking a question
+    // revalidate path
+    revalidatePath(path);
 
     return question;
   } catch (error) {}

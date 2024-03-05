@@ -6,59 +6,11 @@ import { HomePageFilters } from '@/constants/filters';
 import Link from 'next/link';
 import NoResult from '@/components/shared/general/NoResult';
 import QuestionCard from '@/components/cards/QuestionCard';
+import { getQuestions } from '@/lib/actions/question.action';
 
-const questions = [
-  {
-    _id: '1',
-    title: 'How to use TypeScript with React?',
-    tags: [
-      { _id: '1', name: 'TypeScript' },
-      { _id: '2', name: 'React' },
-    ],
-    author: {
-      _id: '1',
-      name: 'John Doe',
-      avatar: '/assets/icons/avatar.svg',
-    },
-    upvotes: 10,
-    views: 100,
-    answers: [],
-    createdAt: new Date('2024-02-27T08:35:04Z'),
-  },
-  {
-    _id: '2',
-    title: 'What is the difference between interface and type in TypeScript?',
-    tags: [{ _id: '1', name: 'TypeScript' }],
-    author: {
-      _id: '2',
-      name: 'Jane Doe',
-      avatar: '/assets/icons/avatar.svg',
-    },
-    upvotes: 20,
-    views: 200,
-    answers: [],
-    createdAt: new Date('2023-02-27T08:35:04Z'),
-  },
-  {
-    _id: '3',
-    title: 'How to handle state in React?',
-    tags: [
-      { _id: '2', name: 'React' },
-      { _id: '3', name: 'State Management' },
-    ],
-    author: {
-      _id: '3',
-      name: 'Alice Smith',
-      avatar: '/assets/icons/avatar.svg',
-    },
-    upvotes: 30,
-    views: 300,
-    answers: [],
-    createdAt: new Date('2024-01-27T08:35:04Z'),
-  },
-];
-
-export default function Home() {
+export default async function Home() {
+  const result = await getQuestions({});
+  console.log(result.questions);
   return (
     <>
       <div className="flex flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
@@ -86,8 +38,8 @@ export default function Home() {
       <HomeFilters />
 
       <div className="mt-10 flex w-full flex-col gap-6">
-        {questions.length > 0 ? (
-          questions.map((question) => (
+        {result.questions.length > 0 ? (
+          result.questions.map((question) => (
             <QuestionCard
               key={question._id}
               _id={question._id}
