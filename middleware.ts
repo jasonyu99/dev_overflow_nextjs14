@@ -14,7 +14,7 @@ export default authMiddleware({
   ],
   // Routes that can always be accessed, and have
   // no authentication information
-  ignoredRoutes: ['/api/webhook', '/api/chatgpt'],
+  ignoredRoutes: ['/api/webhooks', '/api/chatgpt'],
 });
 
 export const config = {
