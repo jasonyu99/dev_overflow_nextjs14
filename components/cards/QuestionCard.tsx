@@ -15,7 +15,7 @@ interface QuestionProps {
   author: {
     _id: string;
     name: string;
-    avatar: string;
+    picture: string;
   };
   upvotes: number;
   views: number;
@@ -58,7 +58,7 @@ const QuestionCard = ({
 
       <div className="flex-between mt-6 w-full flex-wrap gap-3">
         <Metric
-          imgUrl={author.avatar}
+          imgUrl={author.picture}
           alt="user"
           value={author.name}
           title={` - asked ${getTimeStamp(createdAt)}`}
