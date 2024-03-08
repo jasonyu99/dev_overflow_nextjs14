@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import RenderTag from '../shared/search/RenderTag';
+import RenderTag from '../shared/RenderTag';
 import Metric from '../shared/general/Metric';
 import { formatNumber, getTimeStamp } from '@/lib/utils';
 // import { Badge } from '@/components/ui/badge';
