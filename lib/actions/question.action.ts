@@ -2,7 +2,11 @@
 
 import Question from '@/database/question.model';
 import { connectToDatabase } from '../mongoose';
-import { CreateQuestionParams, GetQuestionsParams } from './shared.types';
+import {
+  CreateQuestionParams,
+  GetQuestionByIdParams,
+  GetQuestionsParams,
+} from './shared.types';
 import User from '@/database/user.model';
 import Tag from '@/database/tag.model';
 import { revalidatePath } from 'next/cache';
@@ -65,4 +69,27 @@ export async function createQuestion(params: CreateQuestionParams) {
 
     return question;
   } catch (error) {}
+}
+
+export async function getQuestionById(params: GetQuestionByIdParams) {
+  try {
+    // connect to DB
+    connectToDatabase();
+
+    const { questionId } = params;
+
+    // get the question by id
+    const question = await Question.findById(questionId)
+      .populate({ path: 'tags', model: Tag, select: '_id name' })
+      .populate({
+        path: 'author',
+        model: User,
+        select: '_id clerkId name picture',
+      });
+
+    return question;
+  } catch (error) {
+    console.error(error);
+    throw new Error('An error occurred while fetching question');
+  }
 }

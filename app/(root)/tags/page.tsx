@@ -1,5 +1,5 @@
 import NoResult from '@/components/shared/general/NoResult';
-import Filter from '@/components/shared/search/Filter';
+import Filter from '@/components/shared/Filter';
 import LocalSearchbar from '@/components/shared/search/LocalSearchbar';
 import { TagFilters } from '@/constants/filters';
 import { getAllTags } from '@/lib/actions/tag.actions';

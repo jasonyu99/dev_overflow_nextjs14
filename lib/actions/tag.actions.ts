@@ -9,6 +9,7 @@ export async function getTopInteractedTags(params: GetTopInteractedTagsParams) {
   try {
     connectToDatabase();
 
+    //
     const { userId } = params;
 
     const user = await User.findById(userId);
